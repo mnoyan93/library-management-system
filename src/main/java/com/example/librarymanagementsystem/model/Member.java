@@ -22,5 +22,8 @@ public class Member {
     private String phone;
     private LocalDateTime registrationDate;
     @ManyToMany
+    @JoinTable(name = "member_book",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> borrowedBooks;
 }
