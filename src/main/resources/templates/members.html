@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Members List</title>
+</head>
+<body>
+<h2>Member List</h2><br>
+<a href ="/addMember">Add Member</a>
+
+<table border="1">
+  <tr>
+      <th>Id</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Registration Date</th>
+      <th>Borrowed Books</th>
+  </tr>
+<tr th:each="member:${members}">
+    <td th:text="${member.id}"></td>
+    <td th:text="${member.fullName}"></td>
+    <td th:text="${member.email}"></td>
+    <td th:text="${member.phone}"></td>
+    <td th:text="${member.registrationDate != null ? #temporals.format(member.registrationDate, 'dd-MM-yyyy') : ''}"></td>
+
+</table>
+</body>
+</html>
