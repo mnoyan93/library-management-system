@@ -2,19 +2,22 @@ package com.example.librarymanagementsystem.controller;
 
 import com.example.librarymanagementsystem.model.Category;
 import com.example.librarymanagementsystem.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CategoryController {
-    @Autowired
-    private CategoryRepository categoryRepository;
+
+
+   private  final CategoryRepository categoryRepository;
 
     @GetMapping("/category")
     public String category(ModelMap modelMap) {
@@ -29,17 +32,13 @@ public class CategoryController {
         return "redirect:/category";
     }
 
-    @GetMapping("/addCategory")
+    @GetMapping("/category/add")
     public String addCategoryForm() {
         return "addCategory";
     }
 
-    @PostMapping("/addCategory")
-    public String addCategorySubmit(@RequestParam String name,
-                                    @RequestParam String description) {
-        Category category = new Category();
-        category.setName(name);
-        category.setDescription(description);
+    @PostMapping("/category/add")
+    public String addCategorySubmit(@ModelAttribute Category category){
 
         categoryRepository.save(category);
         return "redirect:/category";
